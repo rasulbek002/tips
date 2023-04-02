@@ -9,7 +9,26 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        main_bg: "#F5F4F2",
+        main_button: "#EF8633",
+        second_title: "#222B45",
+        main_title: "#342E37",
+        plain_text: "#342E37",
+        placeholder: "#9E9B98",
+        white: "#FFFFFF",
+      },
+      screens: {
+        sm: "480px",
+        md: "768px",
+        lg: "976px",
+        xl: "1440px",
+      },
+      fontSize: {
+        "3xl": "1.75rem",
+      },
+    },
   },
   plugins: [],
 };
