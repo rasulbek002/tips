@@ -4,7 +4,7 @@ export const waitress: Employee[] = [
   {
     id: "1",
     firstName: "Айжан",
-    lastName: "Doe",
+    lastName: "Асемова",
     email: "Асемова",
     image: "/image/waitres1.png",
     type: "официант",
@@ -26,8 +26,8 @@ export const waitress: Employee[] = [
   },
   {
     id: "3",
-    firstName: "Марина Ким",
-    lastName: "Болотбаев",
+    firstName: "Марина ",
+    lastName: "Ким",
     email: "bobjohnson@example.com",
     image: "/image/waitres4.png",
     type: "официант",

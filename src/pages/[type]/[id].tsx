@@ -129,6 +129,7 @@ export default function EmployeePage() {
       setPaymentValue("");
       setPickedAnotherSum(true);
       setAnotherPrice(false);
+      setPaymentValueError(false);
     }
     (
       ref.current as HTMLInputElement | null
@@ -169,14 +170,20 @@ export default function EmployeePage() {
                 key={index}
                 sum={item.sum}
                 onClick={pickSum}
-                error={paymentValueError}
+                error={
+                  paymentValueError &&
+                  !isPickedAnotherSum
+                }
                 selectedValue={paymentValue}
               />
             );
           })}
           <ShowSum
             onClick={handleAnotherSum}
-            error={paymentValueError}
+            error={
+              paymentValueError &&
+              !isPickedAnotherSum
+            }
             sum="Другая сумма"
             selectedValue={
               isPickedAnotherSum
