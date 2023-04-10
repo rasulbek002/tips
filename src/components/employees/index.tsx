@@ -16,7 +16,13 @@ import {
 } from "react-redux";
 import { fetchEmployees } from "./redux/listEmployees";
 
-export default function Employees() {
+export interface EmployeesProps {
+  endpoint: string;
+}
+
+export default function Employees({
+  endpoint,
+}: EmployeesProps) {
   const dispatch: AppDispatch = useDispatch();
   const skeletons = new Array(5).fill(null);
   const [status, setStatus] = useState("loading");
@@ -27,7 +33,7 @@ export default function Employees() {
   >;
 
   useEffect(() => {
-    dispatch(fetchEmployees());
+    dispatch(fetchEmployees(endpoint));
   }, [dispatch]);
 
   const { employees } = useSelector(
@@ -36,7 +42,7 @@ export default function Employees() {
 
   setTimeout(() => {
     setStatus("success");
-  }, 3000);
+  }, 1000);
 
   return (
     <div>

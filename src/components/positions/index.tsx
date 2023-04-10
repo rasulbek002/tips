@@ -36,7 +36,7 @@ export default function Positions() {
 
   setTimeout(() => {
     setStatus("success");
-  }, 3000);
+  }, 1000);
 
   return (
     <div>

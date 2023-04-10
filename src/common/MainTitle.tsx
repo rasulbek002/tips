@@ -8,6 +8,8 @@ export default function MainTitle({
   title,
 }: MainTitleProps) {
   return (
-    <h1 className=" text-3xl py-4">{title}</h1>
+    <h1 className=" text-3xl py-4 text-center font-bold">
+      {title}
+    </h1>
   );
 }

@@ -1,55 +1,62 @@
-import { Position } from "../positions/types";
 import { Employee } from "./types";
 
-export const waitress: Position[] = [
+export const waitress: Employee[] = [
   {
-    id: 1,
-    firstName: "John",
+    id: "1",
+    firstName: "Айжан",
     lastName: "Doe",
-    email: "johndoe@example.com",
-    image:
-      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg",
+    email: "Асемова",
+    image: "/image/waitres1.png",
+    type: "официант",
   },
   {
-    id: 2,
-    firstName: "Jane",
-    lastName: "Smith",
-    image:
-      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg",
+    id: "2",
+    firstName: "Адилет",
+    lastName: "Ногойбаев",
+    image: "/image/waitres2.png",
+    type: "официант",
   },
   {
-    id: 3,
-    firstName: "Bob",
-    lastName: "Johnson",
+    id: "3",
+    firstName: "Данияр",
+    lastName: "Болотбаев",
     email: "bobjohnson@example.com",
-    image:
-      "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg",
+    image: "/image/waitres3.png",
+    type: "официант",
+  },
+  {
+    id: "3",
+    firstName: "Марина Ким",
+    lastName: "Болотбаев",
+    email: "bobjohnson@example.com",
+    image: "/image/waitres4.png",
+    type: "официант",
   },
 ];
 
 export const positions = [
   {
-    id: '1',
+    id: "1",
     name: "waitress",
     name_ru: "Официанты",
     image: "/image/Waiter.png",
   },
   {
-    id: '2',
+    id: "2",
     name_ru: "Повара",
     name: "povar",
-    image: "/image/Waiter.png",
+    image: "/image/Chef.png",
   },
   {
-    id: '3',
+    id: "3",
     name: "hostes",
     name_ru: "Хостес",
-    image: "/image/Waiter.png",
+    image: "/image/Hostess.png",
   },
   {
-    id: '4',
+    id: "4",
     name: "barmen",
     name_ru: "Бармены",
-    image: "/image/Waiter.png",
+    image: "/image/Bartender.png",
   },
 ];
