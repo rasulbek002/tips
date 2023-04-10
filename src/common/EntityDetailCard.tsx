@@ -16,8 +16,8 @@ export default function EntityDetailCard({
     <div className=" text-center">
       <div className=" mb-4 flex justify-center ">
         <Image
-          src={image}
-          alt={name}
+          src={image!}
+          alt={name!}
           className="rounded-full"
           width={96}
           height={96}
