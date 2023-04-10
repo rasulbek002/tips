@@ -49,7 +49,7 @@ export default function EmployeePage({
   ] = useState(false);
 
   const ref = useRef(null);
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
   let modalStyle = anotherPrice
@@ -78,7 +78,11 @@ export default function EmployeePage({
 
   useEffect(() => {
     if (anotherPrice) {
-      ref?.current?.focus();
+      if (ref?.current) {
+        (
+          ref.current as HTMLInputElement | null
+        )?.focus();
+      }
       document.body.classList.add(
         "lock-position"
       );
@@ -120,7 +124,9 @@ export default function EmployeePage({
       setPickedAnotherSum(true);
       setAnotherPrice(false);
     }
-    ref?.current?.focus();
+    (
+      ref.current as HTMLInputElement | null
+    )?.focus();
   }
 
   function handleClose() {

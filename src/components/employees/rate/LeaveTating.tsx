@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ReactStars from "react-stars";
 
 export default function LeaveTating() {
-  const [rating, setRating] = useState("0");
+  const [rating, setRating] = useState(0);
 
   return (
     <div>
@@ -17,7 +17,7 @@ export default function LeaveTating() {
             color2={"#EF8633"}
             color1={"#FCE7D6"}
             value={rating}
-            onChange={(e: string) => setRating(e)}
+            onChange={(e: number) => setRating(e)}
           />
         </div>
       </div>

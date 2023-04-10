@@ -1,8 +1,8 @@
 // External dependencies
-import { Ref, useEffect } from "react";
+import { useEffect } from "react";
 
 const useOutsideClick = (
-  ref: Ref,
+  ref: any,
   callback: Function
 ) => {
   const handleClick = (e: Event) => {
