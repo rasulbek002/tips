@@ -16,17 +16,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import useOutsideClick from "@/components/hooks/useOutsideClick";
 
-interface EmployeeProps {
-  employee: {
-    data: Employee;
-  };
-}
-
-export default function EmployeePage({
-  employee: {
-    data: { lastName, firstName, image, type },
-  },
-}: EmployeeProps) {
+export default function EmployeePage() {
   const [anotherPrice, setAnotherPrice] =
     useState(false);
   const [paymentValue, setPaymentValue] =
@@ -48,9 +38,25 @@ export default function EmployeePage({
     setInputPaymentValueError,
   ] = useState(false);
 
+  const [user, setUser] =
+    useState<Employee | null>(null);
+
   const ref = useRef(null);
   const modalRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const { id } = router.query;
+
+  useEffect(() => {
+    async function fetchUser() {
+      const { data } = await fetchEmployeeApi(
+        id as string
+      );
+
+      setUser(data as Employee);
+    }
+
+    fetchUser();
+  });
 
   let modalStyle = anotherPrice
     ? " scale-y-1 origin-bottom fixed z-50 bottom-0 left-0 right-0 p-4 bg-main_bg rounded-t-lg transition-all"
@@ -147,9 +153,9 @@ export default function EmployeePage({
       </div>
       <div className=" mb-8">
         <EntityDetailCard
-          name={`${firstName} ${lastName}`}
-          image={image}
-          type={type}
+          name={`${user?.firstName} ${user?.lastName}`}
+          image={user?.image}
+          type={user?.type}
         />
       </div>
       <div className=" mb-8">
@@ -291,24 +297,4 @@ export default function EmployeePage({
       )}
     </div>
   );
-}
-
-export async function getStaticPaths() {
-  // Call an API or fetch data from a database to get the dynamic paths
-  const { data } = await fetchEmployeesApi();
-  const paths = data.map((item) => ({
-    params: { id: item.id, type: item.type },
-  }));
-  return { paths, fallback: true };
-}
-
-export async function getStaticProps({
-  params,
-}: any) {
-  // Use the dynamic parameters to fetch data for the page
-
-  const employee = await fetchEmployeeApi(
-    params.id
-  );
-  return { props: { employee } };
 }

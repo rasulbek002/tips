@@ -2,9 +2,9 @@ import React from "react";
 import Image from "next/image";
 
 export interface EntityDetailCardProps {
-  image: string;
-  name: string;
-  type: string;
+  image: string | undefined;
+  name: string | undefined;
+  type: string | undefined;
 }
 
 export default function EntityDetailCard({
