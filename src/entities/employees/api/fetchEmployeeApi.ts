@@ -1,5 +1,5 @@
 import axios from "axios";
-import { waitress } from "../data";
+import { waitress } from "../config/data";
 
 export const fetchEmployeeApi = async (
   id: string

@@ -1,11 +1,5 @@
-import Head from "next/head";
-
-import { Inter } from "@next/font/google";
-import MainTitle from "@/common/MainTitle";
-import Positions from "@/components/positions";
-import ArrowIcon from "@/components/svg/ArrowIcon";
-
-const inter = Inter({ subsets: ["latin"] });
+import Positions from "@/entities/positions";
+import MainTitle from "@/shared/MainTitle";
 
 export default function Home() {
   return (

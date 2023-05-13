@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { Employee } from "@/components/employees/types";
-import ArrowIcon from "@/components/svg/ArrowIcon";
+import ArrowIcon from "@/shared/svg/ArrowIcon";
 
 export interface EntityCardProps {
   image: string;

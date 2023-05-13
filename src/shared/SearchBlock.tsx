@@ -1,4 +1,4 @@
-import Search from "@/components/svg/SearchIcon";
+import Search from "@/shared/svg/SearchIcon";
 import React from "react";
 
 export default function SearchBlock() {

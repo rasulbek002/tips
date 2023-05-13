@@ -1,6 +1,3 @@
-import EntityCard from "@/common/EntityCard";
-import EntitySkeleton from "@/common/EntitySkeleton";
-import { RootState } from "@/store/createStore";
 import {
   AnyAction,
   ThunkDispatch,
@@ -14,9 +11,18 @@ import {
   useDispatch,
   useSelector,
 } from "react-redux";
-import { fetchPositions } from "./redux/listPositions";
+import { fetchEmployees } from "./model/listEmployees";
+import { RootState } from "@/App/redux/store";
+import EntitySkeleton from "@/shared/EntitySkeleton";
+import EntityCard from "@/shared/EntityCard";
 
-export default function Positions() {
+export interface EmployeesProps {
+  endpoint: string;
+}
+
+export default function Employees({
+  endpoint,
+}: EmployeesProps) {
   const dispatch: AppDispatch = useDispatch();
   const skeletons = new Array(5).fill(null);
   const [status, setStatus] = useState("loading");
@@ -27,11 +33,11 @@ export default function Positions() {
   >;
 
   useEffect(() => {
-    dispatch(fetchPositions());
+    dispatch(fetchEmployees(endpoint));
   }, [dispatch]);
 
-  const { positions } = useSelector(
-    (state: RootState) => state.positions
+  const { employees } = useSelector(
+    (state: RootState) => state.employees
   );
 
   setTimeout(() => {
@@ -50,15 +56,17 @@ export default function Positions() {
         })
       ) : (
         <div>
-          {positions?.map((item) => {
+          {employees?.map((item) => {
             return (
               <div
                 className=" mb-4"
                 key={item.id}
               >
-                <Link href={`/${item.name}/`}>
+                <Link
+                  href={`/waitress/${item.id}`}
+                >
                   <EntityCard
-                    name={item.name_ru}
+                    name={`${item.firstName} ${item.lastName}`}
                     image={item.image}
                   />
                 </Link>

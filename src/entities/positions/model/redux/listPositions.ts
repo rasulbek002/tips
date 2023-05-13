@@ -2,58 +2,53 @@ import {
   createSlice,
   createAsyncThunk,
 } from "@reduxjs/toolkit";
-import { fetchEmployeesApi } from "../api/fetchEmployeesApi.ts";
-import { Employee } from "../types";
+import { Position } from "../../config/types.js";
+import { fetchPositionsApi } from "../../api/";
 // Define the shape of the initial state
-interface EmployeesState {
-  employees: Employee[];
+interface PositionsState {
+  positions: Position[];
   status: "success" | "loading" | "failed";
   error?: string | null;
 }
 
 // Define the initial state
-const initialState: EmployeesState = {
-  employees: [],
+const initialState: PositionsState = {
+  positions: [],
   status: "success",
   error: null,
 };
 
 // Define the async thunk to fetch employees from the API
-export const fetchEmployees = createAsyncThunk(
-  "employees/fetchEmployees",
-  async (endpoint: string = "employees") => {
-    const response = await fetchEmployeesApi(
-      endpoint
-    );
+export const fetchPositions = createAsyncThunk(
+  "positions/fetchPositions",
+  async () => {
+    const response = await fetchPositionsApi();
 
     return response.data;
   }
 );
 
-// Define the employees slice
-export const employeesSlice = createSlice({
-  name: "employees",
+const positionsSlice = createSlice({
+  name: "positions",
   initialState,
-  reducers: {
-    // Add any extra reducers here
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(
-        fetchEmployees.pending,
+        fetchPositions.pending,
         (state) => {
           state.status = "loading";
         }
       )
       .addCase(
-        fetchEmployees.fulfilled,
+        fetchPositions.fulfilled,
         (state, action) => {
           state.status = "success";
-          state.employees = action.payload;
+          state.positions = action.payload;
         }
       )
       .addCase(
-        fetchEmployees.rejected,
+        fetchPositions.rejected,
         (state, action) => {
           state.status = "failed";
           state.error = action.error.message;
@@ -62,4 +57,4 @@ export const employeesSlice = createSlice({
   },
 });
 
-export default employeesSlice.reducer;
+export default positionsSlice.reducer;

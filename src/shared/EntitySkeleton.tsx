@@ -1,5 +1,5 @@
-import ArrowIcon from "@/components/svg/ArrowIcon";
 import React from "react";
+import ArrowIcon from "./svg/ArrowIcon";
 
 export default function EntitySkeleton() {
   return (

@@ -1,8 +1,19 @@
 import React, { useState } from "react";
 import ReactStars from "react-stars";
+import { useDispatch, useSelector } from "react-redux";
+import { setPayment } from "@/entities/payments/slice";
 
 export default function LeaveTating() {
-  const [rating, setRating] = useState(0);
+  const { review, rate } = useSelector((state) => state.payments);
+  const dispatch = useDispatch();
+
+  function handleChange(event: any) {
+    dispatch(setPayment({ type: "review", value: event.target.value }));
+  }
+
+  function hanldleChangeRate(value: number) {
+    dispatch(setPayment({ type: "rate", value }));
+  }
 
   return (
     <div>
@@ -16,8 +27,8 @@ export default function LeaveTating() {
             size={60}
             color2={"#EF8633"}
             color1={"#FCE7D6"}
-            value={rating}
-            onChange={(e: number) => setRating(e)}
+            value={rate}
+            onChange={(e: number) => hanldleChangeRate(e)}
           />
         </div>
       </div>
@@ -25,7 +36,9 @@ export default function LeaveTating() {
         placeholder="напишите отзыв"
         rows={3}
         name="review"
+        value={review}
         className=" focus:outline-none py-2 px-4 rounded-lg w-full resize-none"
+        onChange={handleChange}
       />
     </div>
   );

@@ -1,5 +1,4 @@
-import { positions } from "@/components/employees/data";
-import axios from "axios";
+import { positions } from "@/entities/employees/config/data";
 
 export const fetchPositionsApi = async () => {
   try {

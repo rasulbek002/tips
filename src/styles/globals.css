@@ -1,7 +1,7 @@
 /* styles/globals.css */
 * {
   -webkit-tap-highlight-color: transparent;
-}
+} 
 
 body.lock-position {
   position: fixed;

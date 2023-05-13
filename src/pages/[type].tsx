@@ -1,9 +1,7 @@
-import MainTitle from "@/common/MainTitle";
-import SearchBlock from "@/common/SearchBlock";
-import Employees from "@/components/employees";
-import { fetchEmployeesApi } from "@/components/employees/api/fetchEmployeesApi.ts";
-import { fetchEmployees } from "@/components/employees/redux/listEmployees";
-import ArrowIcon from "@/components/svg/ArrowIcon";
+import Employees from "@/entities/employees";
+import MainTitle from "@/shared/MainTitle";
+import SearchBlock from "@/shared/SearchBlock";
+import ArrowIcon from "@/shared/svg/ArrowIcon";
 import { useRouter } from "next/router";
 import React from "react";
 
