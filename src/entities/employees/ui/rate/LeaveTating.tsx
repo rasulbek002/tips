@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import ReactStars from "react-stars";
 import { useDispatch, useSelector } from "react-redux";
 import { setPayment } from "@/entities/payments/slice";
+import { RootState } from "@/App/redux/store";
 
 export default function LeaveTating() {
-  const { review, rate } = useSelector((state) => state.payments);
+  const { review, rate } = useSelector((state: RootState) => state.payments);
   const dispatch = useDispatch();
 
   function handleChange(event: any) {
