@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google-pay/button-react": "^3.0.9",
     "@next/font": "13.2.4",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/node": "18.15.10",

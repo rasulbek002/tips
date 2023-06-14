@@ -22,9 +22,9 @@ export default function ArrowIcon({
       <path
         d="M0.999999 1L8 8L1 15"
         stroke={color}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

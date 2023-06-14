@@ -10,8 +10,10 @@ import { Employee } from "@/entities/employees/config/types";
 import EntityDetailCard from "@/shared/EntityDetailCard";
 import Button from "@/shared/Button";
 import { setPayment } from "@/entities/payments/slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SuccessPopup from "@/shared/SuccessPopup";
+import { RootState } from "@/App/redux/store";
+import GooglePayButton from "@google-pay/button-react";
 
 export default function EmployeePage() {
   const [anotherPrice, setAnotherPrice] = useState(false);
@@ -21,6 +23,7 @@ export default function EmployeePage() {
   const [isPickedAnotherSum, setPickedAnotherSum] = useState(false);
   const [inputPaymentValueError, setInputPaymentValueError] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
+  const { review, rate } = useSelector((state: RootState) => state.payments);
 
   const [user, setUser] = useState<Employee | null>(null);
 
@@ -88,6 +91,12 @@ export default function EmployeePage() {
     if (!paymentValue && !inputPaymentValue) {
       setPaymentValueError(true);
     } else {
+      const data = {
+        amount: paymentValue || inputPaymentValue,
+        currency: "sum",
+        review,
+        rate,
+      };
       setSuccess(true);
       setPaymentValueError(false);
     }
@@ -253,6 +262,43 @@ export default function EmployeePage() {
           )}
         </div>
       )}
+      <GooglePayButton
+        environment="TEST"
+        paymentRequest={{
+          apiVersion: 2,
+          apiVersionMinor: 0,
+          allowedPaymentMethods: [
+            {
+              type: "CARD",
+              parameters: {
+                allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                allowedCardNetworks: ["MASTERCARD", "VISA"],
+              },
+              tokenizationSpecification: {
+                type: "PAYMENT_GATEWAY",
+                parameters: {
+                  gateway: "example",
+                  gatewayMerchantId: "exampleGatewayMerchantId",
+                },
+              },
+            },
+          ],
+          merchantInfo: {
+            merchantId: "12345678901234567890",
+            merchantName: "Demo Merchant",
+          },
+          transactionInfo: {
+            totalPriceStatus: "FINAL",
+            totalPriceLabel: "Total",
+            totalPrice: "100.00",
+            currencyCode: "USD",
+            countryCode: "US",
+          },
+        }}
+        onLoadPaymentData={(paymentRequest: any) => {
+          console.log("load payment data", paymentRequest);
+        }}
+      />
     </div>
   );
 }
