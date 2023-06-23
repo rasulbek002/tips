@@ -18,15 +18,11 @@ export default function ShowSum({
     : " rounded-lg bg-white py-3 px-4 text-center";
 
   if (selectedValue === sum) {
-    style =
-      "rounded-lg bg-main_button py-3 px-4 text-center text-white";
+    style = "rounded-lg bg-main_button py-3 px-4 text-center text-white";
   }
   return (
-    <div
-      className={style}
-      onClick={() => onClick(sum)}
-    >
-      {sum}
+    <div className={style} onClick={() => onClick(sum)}>
+      {sum} сум
     </div>
   );
 }

@@ -53,13 +53,13 @@ export default function EmployeePage() {
 
   const listSum = [
     {
-      sum: "10 000 сум",
+      sum: "10000",
     },
     {
-      sum: "15 000 сум",
+      sum: "15000",
     },
     {
-      sum: "20 000 сум",
+      sum: "20000",
     },
   ];
 
@@ -82,21 +82,26 @@ export default function EmployeePage() {
   function handleAnotherSum() {
     setAnotherPrice(true);
   }
-
+  
   function closeInput() {
     setAnotherPrice(false);
   }
 
-  function makePayment() {
+  function makePayment(goolePayData: any) {
     if (!paymentValue && !inputPaymentValue) {
       setPaymentValueError(true);
     } else {
       const data = {
         amount: paymentValue || inputPaymentValue,
         currency: "sum",
+        username: id,
         review,
         rate,
+        tokenizationData: goolePayData.paymentMethodData.tokenizationData,
       };
+      console.log(goolePayData);
+      console.log(data);
+      console.log(JSON.stringify(data));
       setSuccess(true);
       setPaymentValueError(false);
     }
@@ -182,6 +187,47 @@ export default function EmployeePage() {
               />
             </div>
             <div className=" mb-4">
+              <GooglePayButton
+                environment="TEST"
+                paymentRequest={{
+                  apiVersion: 2,
+                  apiVersionMinor: 0,
+                  allowedPaymentMethods: [
+                    {
+                      type: "CARD",
+                      parameters: {
+                        allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+                        allowedCardNetworks: ["MASTERCARD", "VISA"],
+                      },
+                      tokenizationSpecification: {
+                        type: "PAYMENT_GATEWAY",
+                        parameters: {
+                          gateway: "example",
+                          gatewayMerchantId: "exampleGatewayMerchantId",
+                        },
+                      },
+                    },
+                  ],
+                  merchantInfo: {
+                    merchantId: "12345678901234567890",
+                    merchantName: "Demo Merchant",
+                  },
+                  transactionInfo: {
+                    totalPriceStatus: "FINAL",
+                    totalPriceLabel: "Total",
+                    totalPrice: paymentValue || inputPaymentValue + ".00",
+                    currencyCode: "USD",
+                    countryCode: "UZ",
+                  },
+                }}
+                buttonSizeMode="fill"
+                style={{ width: "100%" }}
+                buttonType="pay"
+                buttonLocale="ru"
+                onLoadPaymentData={makePayment}
+              />
+            </div>
+            {/* <div className=" mb-8">
               <Button
                 type="secondary"
                 title="Оплатить через"
@@ -196,23 +242,7 @@ export default function EmployeePage() {
                 }
                 onClick={makePayment}
               />
-            </div>
-            <div className=" mb-8">
-              <Button
-                type="secondary"
-                title="Оплатить через"
-                bg="black"
-                icon={
-                  <Image
-                    src="/image/google.png"
-                    alt="google pay"
-                    width="64"
-                    height="24"
-                  />
-                }
-                onClick={makePayment}
-              />
-            </div>
+            </div> */}
           </div>
           <div className=" pb-4">
             <p className=" text-xs text-second_title mb-4">
@@ -262,43 +292,6 @@ export default function EmployeePage() {
           )}
         </div>
       )}
-      <GooglePayButton
-        environment="TEST"
-        paymentRequest={{
-          apiVersion: 2,
-          apiVersionMinor: 0,
-          allowedPaymentMethods: [
-            {
-              type: "CARD",
-              parameters: {
-                allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
-                allowedCardNetworks: ["MASTERCARD", "VISA"],
-              },
-              tokenizationSpecification: {
-                type: "PAYMENT_GATEWAY",
-                parameters: {
-                  gateway: "example",
-                  gatewayMerchantId: "exampleGatewayMerchantId",
-                },
-              },
-            },
-          ],
-          merchantInfo: {
-            merchantId: "12345678901234567890",
-            merchantName: "Demo Merchant",
-          },
-          transactionInfo: {
-            totalPriceStatus: "FINAL",
-            totalPriceLabel: "Total",
-            totalPrice: "100.00",
-            currencyCode: "USD",
-            countryCode: "US",
-          },
-        }}
-        onLoadPaymentData={(paymentRequest: any) => {
-          console.log("load payment data", paymentRequest);
-        }}
-      />
     </div>
   );
 }
