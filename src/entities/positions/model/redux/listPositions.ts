@@ -1,9 +1,6 @@
-import {
-  createSlice,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
-import { Position } from "../../config/types.js";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchPositionsApi } from "../../api/";
+import { Position } from "../../config/types.js";
 // Define the shape of the initial state
 interface PositionsState {
   positions: Position[];
@@ -22,9 +19,9 @@ const initialState: PositionsState = {
 export const fetchPositions = createAsyncThunk(
   "positions/fetchPositions",
   async () => {
-    const response = await fetchPositionsApi();
+    const data = await fetchPositionsApi();
 
-    return response.data;
+    return data.content;
   }
 );
 
@@ -32,28 +29,20 @@ const positionsSlice = createSlice({
   name: "positions",
   initialState,
   reducers: {},
+
   extraReducers: (builder) => {
     builder
-      .addCase(
-        fetchPositions.pending,
-        (state) => {
-          state.status = "loading";
-        }
-      )
-      .addCase(
-        fetchPositions.fulfilled,
-        (state, action) => {
-          state.status = "success";
-          state.positions = action.payload;
-        }
-      )
-      .addCase(
-        fetchPositions.rejected,
-        (state, action) => {
-          state.status = "failed";
-          state.error = action.error.message;
-        }
-      );
+      .addCase(fetchPositions.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchPositions.fulfilled, (state, action) => {
+        state.status = "success";
+        state.positions = action.payload || [];
+      })
+      .addCase(fetchPositions.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
   },
 });
 

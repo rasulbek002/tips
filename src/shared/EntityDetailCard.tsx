@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 
 export interface EntityDetailCardProps {
@@ -16,7 +15,7 @@ export default function EntityDetailCard({
     <div className=" text-center">
       <div className=" mb-4 flex justify-center ">
         <Image
-          src={image!}
+          src={image ? image : '/image/blank-profile.png'}
           alt={name!}
           className="rounded-full"
           width={96}

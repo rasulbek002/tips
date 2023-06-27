@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <div className="mb-5">
-        <MainTitle title="Команда ресторана" />
+        <MainTitle title="Официанты" />
       </div>
 
       <Positions />

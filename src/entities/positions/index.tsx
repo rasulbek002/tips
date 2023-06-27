@@ -1,42 +1,24 @@
-import {
-  AnyAction,
-  ThunkDispatch,
-} from "@reduxjs/toolkit";
-import Link from "next/link";
-import React, {
-  useEffect,
-  useState,
-} from "react";
-import {
-  useDispatch,
-  useSelector,
-} from "react-redux";
-import { fetchPositions } from "./model/redux/listPositions";
 import { RootState } from "@/App/redux/store";
-import EntitySkeleton from "@/shared/EntitySkeleton";
 import EntityCard from "@/shared/EntityCard";
+import EntitySkeleton from "@/shared/EntitySkeleton";
+import { AnyAction, ThunkDispatch } from "@reduxjs/toolkit";
+import Link from "next/link";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPositions } from "./model/redux/listPositions";
 
 export default function Positions() {
   const dispatch: AppDispatch = useDispatch();
   const skeletons = new Array(5).fill(null);
-  const [status, setStatus] = useState("loading");
-  type AppDispatch = ThunkDispatch<
-    RootState,
-    unknown,
-    AnyAction
-  >;
+  type AppDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
 
   useEffect(() => {
     dispatch(fetchPositions());
   }, [dispatch]);
 
-  const { positions } = useSelector(
-    (state: RootState) => state.positions
-  );
+  const { positions, status } = useSelector((state: RootState) => state.positions);
 
-  setTimeout(() => {
-    setStatus("success");
-  }, 1000);
+
 
   return (
     <div>
@@ -52,13 +34,10 @@ export default function Positions() {
         <div>
           {positions?.map((item) => {
             return (
-              <div
-                className=" mb-4"
-                key={item.id}
-              >
-                <Link href={`/${item.name}/`}>
+              <div className=" mb-4" key={item.id}>
+                <Link href={`/${item.id}/`}>
                   <EntityCard
-                    name={item.name_ru}
+                    name={`${item.name} ${item.surname}`}
                     image={item.image}
                   />
                 </Link>

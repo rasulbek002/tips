@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "@/shared/Button";
 import Image from "next/image";
 
@@ -22,7 +21,7 @@ export default function SuccessPopup({
       <div className="mx-auto mb-6">
         <Image width={96} height={96} src={icon} alt="text" />
       </div>
-      <h2 className=" font-bold text-3xl mb-2">{sum}</h2>
+      <h2 className=" font-bold text-3xl mb-2">{sum} сум</h2>
       <h3 className="flex-auto text-xl">{text}</h3>
       <Button title={buttonText} type="main" onClick={onClose} />
     </div>

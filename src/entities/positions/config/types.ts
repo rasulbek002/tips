@@ -1,6 +1,7 @@
 export interface Position {
   name: string;
   id: string;
-  name_ru: string;
+  surname: string;
+  workPlace: string;
   image: string;
 }

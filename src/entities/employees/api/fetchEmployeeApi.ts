@@ -1,21 +1,8 @@
-import axios from "axios";
-import { waitress } from "../config/data";
+export const fetchEmployeeApi = async (id: string) => {
+  const response = await fetch(
+    `http://16.16.142.144/api/v1/account/getAccount/${id}`
+  );
+  const data = await response.json();
 
-export const fetchEmployeeApi = async (
-  id: string
-) => {
-  try {
-    // const response = await axios.get(
-    //   `/api${id}/`
-    // );
-    // return response.data;
-
-    const waitres = waitress.find(
-      (item) => id === item.id
-    );
-
-    return { data: waitres };
-  } catch (error) {
-    throw new Error("Failed to fetch employee");
-  }
+  return data;
 };
