@@ -22,6 +22,7 @@
     "next": "13.2.4",
     "postcss": "^8.4.21",
     "react": "18.2.0",
+    "react-credit-cards": "^0.8.3",
     "react-dom": "18.2.0",
     "react-draggable": "^4.4.5",
     "react-hook-form": "^7.43.9",
@@ -31,6 +32,7 @@
     "typescript": "5.0.2"
   },
   "devDependencies": {
+    "@types/react-credit-cards": "^0.8.1",
     "@types/react-stars": "^2.2.1"
   }
 }

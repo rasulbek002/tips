@@ -7,7 +7,6 @@ export default function Home() {
       <div className="mb-5">
         <MainTitle title="Официанты" />
       </div>
-
       <Positions />
     </div>
   );

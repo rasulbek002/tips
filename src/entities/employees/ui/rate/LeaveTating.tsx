@@ -1,16 +1,25 @@
-import React, { useState } from "react";
-import ReactStars from "react-stars";
-import { useDispatch, useSelector } from "react-redux";
-import { setPayment } from "@/entities/payments/slice";
 import { RootState } from "@/App/redux/store";
+import { setPayment } from "@/entities/payments/slice";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import ReactStars from "react-stars";
 
 export default function LeaveTating() {
   const { review, rate } = useSelector((state: RootState) => state.payments);
   const dispatch = useDispatch();
+  const [windowSize, setWindowSize] = useState(window.innerWidth)
 
   function handleChange(event: any) {
     dispatch(setPayment({ type: "review", value: event.target.value }));
   }
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener('resize', () => {
+        setWindowSize(window.innerWidth)
+      })
+    }
+  })
 
   function hanldleChangeRate(value: number) {
     dispatch(setPayment({ type: "rate", value }));
@@ -25,8 +34,10 @@ export default function LeaveTating() {
         <div className=" flex justify-center">
           <ReactStars
             count={5}
-            size={60}
+            size={windowSize > 375 ? 60 : 48}
             color2={"#EF8633"}
+
+            this is how I am coding
             color1={"#FCE7D6"}
             value={rate}
             onChange={(e: number) => hanldleChangeRate(e)}
