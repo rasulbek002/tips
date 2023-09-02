@@ -195,7 +195,7 @@ export default function EmployeePage() {
                 <div className=" mb-8">
                   <EntityDetailCard
                     name={`${user?.name} ${user?.surname}`}
-                    image={user?.image}
+                    image={user?.avatar}
                     type={user?.type}
                   />
                 </div>

@@ -5,9 +5,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "www.gravatar.com",
+        hostname: "s3.eu-north-1.amazonaws.com",
         port: "",
-        pathname: "/avatar/**",
+        pathname: "/mytesttipsbucket/**",
       },
     ],
   },

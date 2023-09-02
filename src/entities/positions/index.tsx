@@ -38,7 +38,7 @@ export default function Positions() {
                 <Link href={`/${item.id}/`}>
                   <EntityCard
                     name={`${item.name} ${item.surname}`}
-                    image={item.image}
+                    image={item.avatar}
                   />
                 </Link>
               </div>
