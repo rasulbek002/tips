@@ -36,8 +36,6 @@ export default function LeaveTating() {
             count={5}
             size={windowSize > 375 ? 60 : 48}
             color2={"#EF8633"}
-
-            this is how I am coding
             color1={"#FCE7D6"}
             value={rate}
             onChange={(e: number) => hanldleChangeRate(e)}
