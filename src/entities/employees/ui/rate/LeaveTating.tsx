@@ -43,7 +43,7 @@ export default function LeaveTating() {
         </div>
       </div>
       <textarea
-        placeholder="напишите отзыв"
+        placeholder="Напишите отзыв"
         rows={3}
         name="review"
         value={review}
