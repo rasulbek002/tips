@@ -1,3 +1,5 @@
+import { endpoint } from "@/App/endpoint";
+
 export const fetchPositionsApi = async () => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -17,7 +19,7 @@ export const fetchPositionsApi = async () => {
   };
 
   const response = await fetch(
-    "http://16.16.142.144/api/v1/account/listAccounts",
+    `${endpoint}/account/listAccounts`,
     requestOptions
   );
 
