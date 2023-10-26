@@ -8,6 +8,7 @@ export default function Home() {
       <div className="mb-5">
         <CreditCardForm />
       </div>
+      
     </div>
   );
 }
