@@ -1,11 +1,11 @@
 import Button from "@/shared/Button";
 import { useState } from "react";
+import axios from "axios";
 
 const CreditCardForm = () => {
   const [verifyCode, setVerifyCode] = useState({ state: false, code: "" });
-  const [{ paymentLoading, ...payment }, setPayment] = useState<any>({
-    loading: false,
-  });
+  const [paymentLoading, setPayment] = useState<any>({});
+  const [createPaymentLoading, setCreatePaymentLoading] = useState(true);
 
   const [cardNumber, setCardNumber] = useState("");
   const [expireDate, setExpireDate] = useState("");
@@ -27,43 +27,40 @@ const CreditCardForm = () => {
     setCvv(input);
   };
 
-  const makePayment = async () => {
-    setPayment((prev: any) => ({ ...prev, loading: true }));
-    console.log("paymentCalled");
+  console.log(paymentLoading);
 
-    try {
-      const endpoint = "https://checkout.test.paycom.uz/api";
-      const authHeader = "X-Auth: {id}"; // Replace {id} with the actual ID
+  const makePayment = () => {
+    setCreatePaymentLoading(true);
+    const endpoint = "http://checkout.test.paycom.uz/api";
+    const authHeader = "100fe486b33784292111b7dc";
 
-      const requestBody = {
-        card: {
-          number: cardNumber,
-          expire: expireDate,
-        }, // Replace with your card data
-      };
+    const requestBody = {
+      id: 123,
+      method: "cards.create",
+      params: {
+        card: { number: "8600069195406311", expire: "0399" },
+        save: true,
+      },
+    };
 
-      const response = await fetch(endpoint, {
-        method: "POST", // Adjust the HTTP method if needed
+    axios
+      .post(endpoint, requestBody, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: authHeader,
+          "X-Auth": authHeader,
+          "Cache-Control": "no-cache",
         },
-        body: JSON.stringify(requestBody),
+      })
+      .then((response) => {
+        setPayment(response.data);
+      })
+      .catch((error) => {
+        console.error("Payment request failed", error);
+        setPayment(null);
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        setPayment((prev: any) => ({ ...prev, loading: false, ...result }));
-      } else {
-        console.error("Payment request failed");
-        setPayment((prev: any) => ({ ...prev, loading: false }));
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-      setPayment((prev: any) => ({ ...prev, loading: false }));
-    }
+    setCreatePaymentLoading(false);
   };
-
   return (
     <div className="flex flex-wrap gap-3 w-full p-5">
       <label className="relative w-full flex flex-col">
@@ -151,7 +148,7 @@ const CreditCardForm = () => {
       </div>
       <Button
         type="main"
-        loading={paymentLoading}
+        loading={createPaymentLoading}
         title="Оплатить"
         onClick={makePayment}
       />
