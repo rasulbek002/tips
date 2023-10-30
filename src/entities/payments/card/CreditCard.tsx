@@ -31,22 +31,22 @@ const CreditCardForm = () => {
 
   const makePayment = () => {
     setCreatePaymentLoading(true);
-    const endpoint = "http://checkout.test.paycom.uz/api";
-    const authHeader = "100fe486b33784292111b7dc";
+    const endpoint = "https://checkout.test.paycom.uz/api";
+    const authHeader = "ZPDODSiTYKuX0jyO7Kl2to4rQbNwG08jbghj";
 
     const requestBody = {
-      id: 123,
+      jsonrpc: "2.0",
       method: "cards.create",
       params: {
-        card: { number: "8600069195406311", expire: "0399" },
-        save: true,
+        card: { number: "8600495473316478", expire: "0399" },
+        save: false,
       },
+      id: "5e730e8e0b852a417aa49ceb",
     };
 
     axios
       .post(endpoint, requestBody, {
         headers: {
-          "Content-Type": "application/json",
           "X-Auth": authHeader,
           "Cache-Control": "no-cache",
         },
