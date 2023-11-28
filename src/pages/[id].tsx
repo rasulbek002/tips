@@ -46,6 +46,8 @@ export default function EmployeePage() {
       setLoading(false);
     }
 
+    document.body.style.minHeight = "100vh";
+
     if (id) {
       fetchUser();
     }
@@ -348,8 +350,8 @@ export default function EmployeePage() {
       )}
     </div>
   ) : (
-    <div className="absolute top-[30%]">
-      <CreditCardForm />
+    <div className="w-full flex items-center justify-center ">
+      <CreditCardForm sum={+paymentValue || +inputPaymentValue} />
     </div>
   );
 }

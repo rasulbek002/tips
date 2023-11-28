@@ -1,10 +1,11 @@
 import Button from "@/shared/Button";
 import Image from "next/image";
+import { ReactNode } from "react";
 
 interface SuccessPopup {
   text?: string;
   icon?: string;
-  sum?: string;
+  sum?: any;
   onClose: () => void;
   buttonText?: string;
 }
@@ -12,10 +13,10 @@ interface SuccessPopup {
 export default function SuccessPopup({
   text = "Ваш платеж произведен, спасибо!",
   icon = "/image/checkmark-circle.png",
-  sum = "200 сум",
+  sum = 200,
   buttonText = "Готово",
   onClose,
-}: SuccessPopup) {
+}: SuccessPopup): any {
   return (
     <div className=" px-3  bg-main_bg fixed top-0 left-0 right-0 bottom-0 z-10 flex flex-col py-10 h-screen text-center">
       <div className="mx-auto mb-6">
